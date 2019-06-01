@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +41,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements LocationAdapter.OnLocationClicked{
 
     private static final int PERMISSIONS_REQUEST = 1;
-    private static final String GOOGLE_DISTANCE_MATRIX_KEY = "AIzaSyCoA6vL0t2is5LiW1W1C8HvjkFPOjT4MO4";
 
     Button startStop;
     boolean isGpsEnabled;
@@ -52,21 +52,21 @@ public class MainActivity extends AppCompatActivity implements LocationAdapter.O
     User currentLocationObject;
     static AppPreferences prefManager;
 
-//    static {
-//        System.loadLibrary("native-lib");
-//    }
+    static {
+        System.loadLibrary("native-lib");
+    }
 //
-//    public native String getNativeKey();
+    public native String getNativeKey();
+
+
+    public String getGoogleDistanceMatrixKey(){
+        return new String(Base64.decode(getNativeKey(), Base64.DEFAULT));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupViews();
-
-//        String key1 = new String(Base64.decode(getNativeKey(), Base64.DEFAULT));
-//        Log.d("nativedup", "onCreate: "+ key1);
-
-
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show();
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements LocationAdapter.O
         Map<String, String> params = new HashMap<String, String>();
         params.put(Constants.ORIGINS, "" + user.getStartLatitude() + "," + user.getStartLongitude());
         params.put(Constants.DESTINATION, "" + user.getEndLatitude() + "," + user.getEndLongitude());
-        params.put(Constants.GOOGLE_MAPS_KEY, GOOGLE_DISTANCE_MATRIX_KEY);
+        params.put(Constants.GOOGLE_MAPS_KEY, getGoogleDistanceMatrixKey());
         Call<GoogleDistanceApiResponseModel> call = apiInterface.getDistance("json", params);
         call.enqueue(new Callback<GoogleDistanceApiResponseModel>() {
             @Override

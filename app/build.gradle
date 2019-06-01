@@ -11,9 +11,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        ndk {
-            abiFilters "armeabi-v7a", "x86", "armeabi", "mips"
-        }
+//        ndk {
+//            abiFilters "armeabi-v7a", "x86", "armeabi", "mips"
+//        }
         externalNativeBuild{
             cmake{
                 cppFlags ""
@@ -28,8 +28,8 @@ android {
     }
 
     externalNativeBuild{
-        cmake{
-            "CMakeLists.txt"
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
         }
     }
 }
