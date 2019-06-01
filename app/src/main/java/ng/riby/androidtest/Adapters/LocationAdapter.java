@@ -47,8 +47,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         holder.startCoordinates.setText(decimalFormat.format(user.getStartLatitude()) + ", ");
         holder.startCoordinates.append(decimalFormat.format(user.getStartLongitude()));
         holder.distanceCovered.setText(user.getDistanceCovered());
-        holder.endCoordinates.setText(decimalFormat.format(user.getEndLatitude()) + ", ");
-        holder.endCoordinates.append(decimalFormat.format(user.getEndLongitude()));
+        if (user.getEndLatitude() == 0.0){
+            holder.endCoordinates.setText(String.valueOf(user.getEndLatitude()) + ", ");
+            holder.endCoordinates.append(String.valueOf((user.getEndLongitude())));
+        }else{
+            holder.endCoordinates.setText(decimalFormat.format(user.getEndLatitude()) + ", ");
+            holder.endCoordinates.append(decimalFormat.format(user.getEndLongitude()));
+        }
+
+
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

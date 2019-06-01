@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements LocationAdapter.O
                 destination.setLongitude( user.getEndLongitude());
                 float distance = location.distanceTo(destination);
                 Log.d("distance", "onFailure: "+ distance);
-                user.setDistanceCovered(String.valueOf(distance)+ "m");
+                user.setDistanceCovered(String.valueOf(distance)+ " m");
                 new UpdateTask(MainActivity.this,user, po).execute();
 
 

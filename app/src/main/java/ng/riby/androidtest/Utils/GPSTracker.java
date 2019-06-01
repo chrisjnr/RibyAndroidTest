@@ -177,7 +177,6 @@ public final class GPSTracker implements LocationListener {
     public void onLocationChanged(Location location) {
 
         Log.d("gps", location.getLatitude()+"," + location.getLongitude());
-        Toast.makeText(mContext, location.getLatitude()+"," + location.getLongitude(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
