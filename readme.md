@@ -1,9 +1,14 @@
 #Riby Android Test
+<p>
 #Submitted By Manuel Chris-Ogar
+</p>
 
+<p>
 ##Edit
 ```if App refuses to compile in Android Studio, Please install Native Development Kit and configure CMakeLists.
 ```It's used to store the Google API KEY securely
+</p>
+
 ## Synopsis
 <p>
 The objective of this test is to create an app that tracks the movement of a device.
